@@ -1,9 +1,11 @@
-import { Controller, Post, Get, Patch, ParseIntPipe, UsePipes, ValidationPipe, Param, Body, Delete } from '@nestjs/common';
+import { Controller, Post, Get, Patch, ParseIntPipe, UsePipes, ValidationPipe, Param, Body, Delete, UseGuards } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { JwtGuard } from 'src/auth/guards/jwt.guard';
 
 @Controller('books')
+@UseGuards(JwtGuard)
 @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform:true}))
 
 export class BooksController {
