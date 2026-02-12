@@ -12,8 +12,25 @@
         {
           "name": "Get All Book",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidGVzdEBlbWFpbC5jb20iLCJpYXQiOjE3NzA4ODg2OTgsImV4cCI6MTc3MDg5MjI5OH0.O3t3Y3DJGWozKLqlEtbvHTURxdMITjFEA4FvZNUZQgE",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
-            "header": [],
+            "header": [
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
             "url": {
               "raw": "http://localhost:3000/books",
               "protocol": "http",
@@ -30,20 +47,64 @@
         },
         {
           "name": "Get Book By Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidGVzdEBlbWFpbC5jb20iLCJpYXQiOjE3NzA4ODg2OTgsImV4cCI6MTc3MDg5MjI5OH0.O3t3Y3DJGWozKLqlEtbvHTURxdMITjFEA4FvZNUZQgE",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
-            "header": []
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/books/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "books",
+                "1"
+              ]
+            }
           },
           "response": []
         },
         {
           "name": "Add Book",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidGVzdEBlbWFpbC5jb20iLCJpYXQiOjE3NzA4ODg2OTgsImV4cCI6MTc3MDg5MjI5OH0.O3t3Y3DJGWozKLqlEtbvHTURxdMITjFEA4FvZNUZQgE",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{   \r\n    \"title\": \"The Fellowship of the Ring \",\r\n    \"author\": \"J. R. R. Tolkien\",\r\n    \"isbn\": \"0345339711\",\r\n    \"description\": \"Epic High fantasy\",\r\n    \"publishedAt\": \"1954-11-11\"\r\n}",
+              "raw": "{   \r\n    \"title\": \"The Return of The King \",\r\n    \"author\": \"J. R. R. Tolkien\",\r\n    \"isbn\": \"1565116690\",\r\n    \"description\": \"Epic High fantasy\",\r\n    \"publishedAt\": \"1955-10-20\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -99,6 +160,64 @@
               "path": [
                 "books",
                 "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"test@email.com\",\r\n    \"password\":\"testpassword\",\r\n    \"name\":\"TestUser\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"test@email.com\",\r\n    \"password\":\"testpassword\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "login"
               ]
             }
           },
