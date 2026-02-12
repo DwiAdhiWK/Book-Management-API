@@ -9,12 +9,14 @@ export class BooksService {
     constructor(private readonly prisma: PrismaService){}
 
     findAll(){
+        // Get all non deleted books
        return this.prisma.book.findMany({
         where: {isDeleted: false}
        });
     }
 
     async findOne(id: number){
+        // Check if book with id exist
         const book = await this.prisma.book.findUnique({
             where: {id},
         });
@@ -27,14 +29,17 @@ export class BooksService {
     }
 
     create(createBookDto: CreateBookDto){
+        // create new book
         return this.prisma.book.create({
             data: createBookDto
         }) 
     }
 
     async update(id: number, updateBookDto:UpdateBookDto){
+        //find book with id
         await this.findOne(id);
 
+        // update found book
         return this.prisma.book.update({
             where: {id},
             data: updateBookDto,
@@ -42,8 +47,10 @@ export class BooksService {
     }
 
     async remove(id:number){
+        // find book with id
         await this.findOne(id);
 
+        // soft delete found book
         return this.prisma.book.update({
             where: {id},
             data: {isDeleted: true, deletedAt: new Date()},
