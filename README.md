@@ -1,4 +1,4 @@
-<p align="center">
+<!-- <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
@@ -17,11 +17,11 @@
   <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
     <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
+</p> -->
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+<!-- ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
@@ -92,6 +92,78 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE). -->
+
+# Book Management API
+A simple REST API for managing books, built with NestJS + Prisma + PostgreSQL.
+
+## Tech Stack
+
+- **Framework**: NestJS
+- **ORM/Database**: Prisma ORM (v5.22) + PostgreSQL
+- **Authentication**: JWT (@nestjs/jwt + passport-jwt)
+- **Validation**: class-validator & class-transformer
+- **Testing**: Jest + supertest (E2E)
+- **Documentation**: Postman Collection
+
+## Feature
+
+- Full CRUD operations for books
+- Soft-delete (marks as deleted instead of removing from DB)
+- User registration & login with JWT tokens
+- Protected routes (/books requires valid Bearer token)
+- Input validation & proper error handling (400, 401, 404)
+- Postman collection for interactive API testing
+- E2E tests covering auth flow and protected endpoints
+
+## Setup
+```bash
+# git clone repository
+git clone https://github.com/DwiAdhiWK/Book-Management-API.git
+cd Book-Management-API/book-api
+
+# install dependencies
+npm install
+
+# create .env file in the book-api/ folder
+DATABASE_URL="postgresql://postgres:password@localhost:5432/db_name?schema=public" JWT_SECRET=your-super-secret-key-change-this-in-production
+
+# generate prisma client & run migrations
+npx prisma generate
+npx prisma migrate dev
+
+# development
+npm run start:dev
+```
+
+## API Documentation
+
+Full interactive Postman collection: (./docs/book-api.postman_collection.json)
+
+- import into Postman
+- set environment variable 'baseUrl' = http://localhost:3000
+- Test CRUD in the 'Books' folder
+- Test auth in the 'Auth' folder
+
+## Project Structure
+
+This project follows Feature-Based sturcture with feature, group in a it's own seperate folder with their own module, controller, and service such that it will be easier to scale and test individual features.
+
+## E2E Token
+
+Cover auth flow + protected endpoints:
+
+- Register -> token
+- Login -> token
+- GET /books -> 401 without token, 200 with token
+- Post /books -> 401 without token, 201 with token
+
+Run with:
+powershell
+npm run test:e2e
 
 ## License
 
