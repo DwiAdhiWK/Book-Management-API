@@ -137,6 +137,9 @@ npx prisma migrate dev
 
 # development
 npm run start:dev
+
+# e2e tests
+$ npm run test:e2e
 ```
 
 ## API Documentation
