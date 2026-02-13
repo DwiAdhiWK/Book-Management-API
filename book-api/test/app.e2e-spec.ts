@@ -3,6 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { App } from 'supertest/types';
 import { AppModule } from './../src/app.module';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 describe('Auth and Books', () => {
   // let app: INestApplication<App>;
@@ -25,11 +26,20 @@ describe('Auth and Books', () => {
 
     let app: INestApplication;
     let token: string;  
+    let prisma: PrismaService
+
+    const uniqueSuffix = Date.now();
 
     const testUser = {
-      email: 'e2e_test@example.com',
+      email: `e2e_test@example.com`,
       password: 'testpassword123',
       name: 'E2E Test User'
+    }
+
+    const testBook = {
+      title: 'E2E Protected Book',
+      author: 'E2E Author',
+      isbn: `9780306406157`,  
     }
 
     beforeAll(async () =>{
@@ -39,6 +49,11 @@ describe('Auth and Books', () => {
 
       app = moduleFixture.createNestApplication();
       await app.init();
+
+      prisma = app.get(PrismaService);
+
+      await prisma.book.deleteMany();
+      await prisma.user.deleteMany();
     });
 
     afterAll(async () => {
@@ -103,10 +118,9 @@ describe('Auth and Books', () => {
       .send({
         title: 'E2E Protected Book',
         author: 'E2E Author',
-        isbn: '9876543210',
-      })
-      .expect(201);
-
+        isbn: testBook.isbn,
+      }).expect(201);
+    
     expect(response.body).toHaveProperty('id');
     expect(response.body.title).toBe('E2E Protected Book');
   });
